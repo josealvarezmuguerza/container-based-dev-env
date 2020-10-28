@@ -47,6 +47,24 @@ CONTAINER ID  IMAGE                           COMMAND  CREATED         STATUS   
 2. Later it verifies the existence of abandoned container with same name, in that case it remove the exited and obsolete container.
 3. Launches a new desired container
 
+## some configured tools
+ - mattermost
+ - awscli
+ - kubectl
+ - k3s
+ - kops
+ - zoom
+ - spotify
+ - dev: the environment
+ - Libre Office
+ - node environment
+ - swagger
+ - timescaledb
+ - mysql
+ - dbeaver
+ - pgadmin
+ - hapi: The HL7 FHIR server 
+ 
 
 # author
 * [@josealvarezmuguerza](https://github.com/josealvarezmuguerza) in collaboration of community who kindly shared some dockerfiles.  
