@@ -21,13 +21,26 @@ Then, copy file `.docker-runs.sh` under `${HOME}/bin/`.
 
 ### Quick example:
 ```
-ubuntu$ mysqld
+:~$ mysqld
 Existing abandoned mysqld container. Removing...
 27e8cd7934fdfced42d5a042eb41cbdbbb0d5c231d7d8bcb527b82b3bcdd29f4
 ... archive removed!
 Launching new mysqld container...
 9e60441bc2ec34dd5c17a76e6299383860740c93dd159b525e53547de4b4fcf9
 ``` 
+
+check running containers
+
+```
+:~$ podman ps 
+CONTAINER ID  IMAGE                           COMMAND  CREATED         STATUS             PORTS   NAMES
+172e8458fc3e  docker.io/library/mysql:latest  mysqld   17 seconds ago  Up 15 seconds ago          mysqld
+
+```
+
+* NOTE: In my case I use `podman` instead of `docker`, you can change the tool name in the above command
+ 
+
 
 # workflow 
 1. It first verifies the container is not already up & running, in that case it suggests you to reuse it
@@ -36,4 +49,4 @@ Launching new mysqld container...
 
 
 # author
-@Josealvarezmuguerza in collaboration of community who kindly shared some dockerfiles.  
+@josealvarezmuguerza in collaboration of community who kindly shared some dockerfiles.  
