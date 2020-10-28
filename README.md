@@ -2,7 +2,7 @@
 
 Linux home for programmers based on docker containers. 
 
-If you are a hater like me on installing new tools once you jump into a new project, you will love solution! It wraps in containers each and every app / tool / framework / library you need in your daily job keeping your machine host OS clean as day-zero :sparkles: .
+If you are a hater like me on installing new tools once you jump into a new project, you will love this solution! It wraps in containers each and every app / tool / framework / library you need in your daily job keeping your machine host OS clean as day-zero :sparkles: .
 
 # setup
 Firstly, identify which shell command-line interpreter your Terminal uses. In my case I use `bash`, so at the end of `${HOME}/.bashrc` file add these two lines:
@@ -64,7 +64,7 @@ CONTAINER ID  IMAGE                           COMMAND  CREATED         STATUS   
  - dbeaver
  - pgadmin
  - hapi: The HL7 FHIR server 
- 
+
 
 # author
 * [@josealvarezmuguerza](https://github.com/josealvarezmuguerza) in collaboration of community who kindly shared some dockerfiles.  
