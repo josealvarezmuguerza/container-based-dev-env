@@ -13,15 +13,16 @@ setup(){
               echo "There is "$container_name" container already in running state. Let's re-use it! "
 	else
 		# remove abandoned instance
-		stop=$($user podman inspect --format "{{.State.Stop}}" "$container_name" 2>/dev/null)	
-		if [[ "$stop" != "false" ]]; then
+		stop=$($user podman inspect --format "{{.State.Running}}" "$container_name" 2>/dev/null)	
+		if [[ "$stop" == "false" ]]; then
 			echo "Existing abandoned " $container_name " container. Removing..."
 			$user podman rm "$container_name"
 			echo "... archive removed!"
+		else 
+			# launch new instance
+			echo "Launching new $container_name container..."
+			$user $@
 		fi
-		# launch new instance
-		echo "Launching new $container_name container..."
-		$user $@
 	fi
 }
 
@@ -34,9 +35,21 @@ aws(){
 	docker_command=$(echo "podman run -it --rm \
 		-v ${HOME}/workspace:/root/workspace/ \
 		-v ${HOME}/.aws:/root/.aws \
-		-v ${HOME}/.ssh:/root/.ssh \	
-		--name ${container_name} 
+		-v ${HOME}/.ssh:/root/.ssh \
+		--name ${container_name} \
 		jess/awscli "$aws_params)
+
+	setup $docker_command
+}
+
+jq(){
+	export container_name=${FUNCNAME[0]}
+	jq_params=$@
+
+	docker_command=$(echo "podman run -it --rm \
+		-v ${HOME}/workspace:/root/workspace/ \
+		--name ${container_name} \
+		jess/jq "$jq_params)
 
 	setup $docker_command
 }
