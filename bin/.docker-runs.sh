@@ -54,6 +54,39 @@ jq(){
 	setup $docker_command
 }
 
+
+smilecdr(){
+	export container_name=${FUNCNAME[0]}
+
+	docker_command=$(echo "podman run -it --rm \
+		 -p 8000:8000 \
+		 -p 8001:8001 \
+		 -p 9000:9000 \
+		 -p 9100:9100 \
+		 -p 9200:9200 \
+		 -p 9201:9201 \
+		 -v smilecdr_log:/home/smile/smilecdr/log \
+		 -v smilecdr_db:/home/smile/smilecdr/database \
+		 -v smilecdr_mq:/home/smile/smilecdr/activemq-data \
+		--name ${container_name} \
+		 docker.smilecdr.com/smilecdr:2020.08.R03")
+
+	setup $docker_command
+}
+
+nlp(){
+	export container_name=${FUNCNAME[0]}
+
+	docker_command=$(echo "podman run -it --rm \
+		--volume ${HOME}/workspace:/home/yuefeng 
+		--name ${container_name} \
+		-p 8888:8888 \
+		-p 4040:4040 \
+		zhangyuefeng123/sparknlp:1.0" )
+		
+	setup $docker_command
+}
+
 mattermost(){
 	export container_name=${FUNCNAME[0]}
 	mattermost_params=$@
@@ -179,7 +212,7 @@ spotify(){
 # dev env Java, maven, node , yarn
 dev(){
 	export container_name=${FUNCNAME[0]}
-	echo "Launching " $name " - Ubuntu 20.04 LTS - Openjdk 14.0.1 - Apache Maven 3.6.3 - Git - node"
+	echo "Launching " $name " - Ubuntu 20.04 LTS - Openjdk 14.0.1 - Apache Maven 3.6.3 - Git - node - yarn"
 	
 	docker_command=$(echo "podman run -it --rm \
 		-v $(pwd)/workspace:/root/workspace \
@@ -222,22 +255,6 @@ office(){
 
 	setup $docker_command	
 }
-
-
-node-custom(){
-	export container_name=${FUNCNAME[0]}
-	docker_command=$(echo "podman run --rm -it \
-		-v ${HOME}/workspace/:/root/ \
-		-v $HOME/Downloads:/root/Downloads \
-		-v $HOME/tools:/root/tools \
-		-p 3000:3000 \
-		--name ${container_name} 
- 		--entrypoint bash \
-		node-custom")
-
-	setup $docker_command	
-}
-
 
 swagger(){
 	export container_name=${FUNCNAME[0]}
